@@ -1,0 +1,365 @@
+:root {
+  --primary-color: #ff7e01;
+  --secondary-color: #faa935;
+  --heading-color: #0b2727;
+  --text-color: #6e7074;
+  --font-name: "Montserrat", sans-serif;
+  --subtitle-font-name: "Island Moments", cursive;
+}
+
+.hero__subtitle img {
+  width: 2.3rem;
+  height: 2.3rem;
+}
+
+.hero__content h1 {
+  font-size: 2.5rem;
+  font-weight: 600;
+  margin-top: 1rem;
+  margin-bottom: 2rem;
+  color: var(--heading-color);
+}
+
+.hero__content h1 .hightlight {
+  color: var(--secondary-color);
+}
+
+.hero__content p {
+  font-size: 1rem;
+  color: var(--text-color);
+  line-height: 1.4rem;
+}
+
+.hero__img-box img,
+.hero__img-box video {
+  width: 100%;
+  height: 350px;
+  border-radius: 20px;
+  border: 1px solid var(--secondary-color);
+  object-fit: cover;
+}
+
+.hero__content {
+  padding-top: 3.5rem;
+}
+
+.hero__img-box {
+  padding-top: 2rem;
+}
+
+.carousel {
+  width: 100%;
+  height: 80%;
+  margin-bottom: 20px;
+  font-size: 2rem;
+}
+
+.carousel-caption {
+  position: absolute;
+  right: 15%;
+  top: 31vw;
+  bottom: 1.25rem;
+  left: 15%;
+  padding-top: 1.25rem;
+  padding-bottom: 1.25rem;
+  color: #fff;
+  text-align: center;
+}
+.carousel-control-prev {
+  height: 100vh;
+}
+.carousel-control-next {
+  height: 100vh;
+}
+
+.carousel .carousel-control-prev-icon {
+  visibility: hidden;
+}
+.carousel:hover .carousel-control-prev-icon {
+  visibility: visible;
+}
+
+.carousel .carousel-control-next-icon {
+  visibility: hidden;
+}
+.carousel:hover .carousel-control-next-icon {
+  visibility: visible;
+}
+
+.carousel-content {
+  position: absolute;
+  bottom: 10%;
+  left: 5%;
+  z-index: 20;
+  color: white;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.6);
+}
+
+.carousel-caption p {
+  margin-top: -218px;
+  font-size: larger;
+  color: white;
+  /* font-weight: bold;     */
+}
+
+.carousel-caption p:hover {
+  color: #faa935;
+}
+
+.heading {
+  text-align: center;
+  padding: 2.5rem 0;
+}
+
+.heading span {
+  font-size: 3.5rem;
+  background: rgba(255, 165, 0, 0.2);
+  color: var (--orange);
+  border-radius: 0.5rem;
+  padding: 0.3rem 1rem;
+}
+
+.heading span.space {
+  background: none;
+}
+
+.services__subtitle {
+  font-size: 2rem;
+  font-weight: 500;
+  color: #ee6e6e;
+  font-family: var(--subtitle-font-name);
+}
+
+.services__title {
+  font-size: 2rem;
+  font-weight: 500;
+}
+
+/* ===================================================  */
+.services .box-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+}
+
+.services .box-container .box {
+  flex: 1 1 20rem;
+  border-radius: 0.5rem;
+  padding: 1rem;
+  text-align: center;
+}
+
+.services .box-container .box i {
+  padding: 1rem;
+  font-size: 3rem;
+  color: var(--secondary-color);
+}
+
+.services .h1 {
+  font-size: medium;
+}
+
+.heading span {
+  font-size: 2.5rem;
+  background: rgba(255, 165, 0, 0.2);
+  color: var (--orange);
+  border-radius: 0.5rem;
+  padding: 0.2rem 1rem;
+}
+
+/* .heading{
+      text-align: center;
+      padding:2.5rem 0;
+  }  */
+
+/* .heading span{
+  font-size: 2.5rem;
+  background:rgba(255, 165, 0, .2);
+  color: var (--orange);
+  border-radius: .5rem;
+  padding: .2rem 1rem;
+  } */
+
+.heading span.space {
+  background: none;
+}
+
+.services .box-container .box h3 {
+  font-size: 2.5rem;
+  color: #333;
+}
+
+.services .box-container .box p {
+  font-size: 1.5rem;
+  color: #666;
+  padding: 1rem 0;
+}
+
+.services .box-container .box:hover {
+  box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.1);
+}
+
+/* ===============================================  */
+
+.featured__tour-title {
+  font-size: 1.6rem;
+  font-weight: 500;
+}
+
+/* EXPERIENCE SECTION */
+.experience__content h2 {
+  font-size: 2rem;
+  font-weight: 500;
+  margin-top: 1rem;
+}
+
+.experience__content p {
+  font-size: 1.2rem;
+  color: var(--text-color);
+  margin-top: 1rem;
+}
+
+.counter__wrapper {
+  margin-top: 1.6rem;
+}
+
+.counter__box span {
+  width: 70px;
+  height: 70px;
+  margin: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--primary-color);
+  color: #fff;
+  font-size: 1.2rem;
+  font-weight: 600;
+  border-radius: 10px 5px 10px 5px;
+}
+
+.counter__box h6 {
+  font-size: 0.8rem;
+  margin-top: 0.5rem;
+  color: var(--text-color);
+}
+
+.experience__img img {
+  width: 90%;
+}
+
+/* GALLERY SECTION */
+.gallery__title {
+  font-size: 1.6rem;
+  margin-bottom: 2.5rem;
+  margin-top: 0.8rem;
+}
+
+.masonry__img {
+  transition: 0.3s;
+}
+
+.masonry__img:hover {
+  transform: scale(1.1);
+}
+
+/* TESTIMONIAL SECTION */
+.testimonial__title {
+  font-size: 1.6rem;
+  margin-top: 0.8rem;
+}
+
+.contact .row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  align-items: center;
+}
+
+.contact .row .image {
+  flex: 1 1 35rem;
+}
+
+.contact .row .image img {
+  width: 100%;
+}
+
+.contact .row form {
+  flex: 1 1 50rem;
+  padding: 2rem;
+  box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.1);
+  border-radius: 0.5rem;
+}
+
+.contact .row form .inputBox {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  /* border-radius: .5rem;
+  border: .1rem solid rgba(0,0,0,.1); */
+
+  /* border-color: #333; */
+}
+
+.contact .row form .inputBox input,
+.contact .row form textarea {
+  width: 49%;
+  margin: 0.5rem 0;
+  padding: 0.7rem;
+  font-size: 1rem;
+  color: #333;
+  background: #fff;
+  text-transform: none;
+}
+
+.contact .row form textarea {
+  height: 15rem;
+  resize: none;
+  width: 100%;
+  /* border-radius: 10px;
+  border-color: #666; */
+}
+
+.contact .row form .inputBox input {
+  width: 100%;
+}
+
+/* =============== RESPONSIVE ================ */
+@media only screen and (max-width: 992px) {
+  .hero__content h1 {
+    font-size: 2.5rem;
+  }
+
+  .hero__img-box {
+    display: none;
+  }
+
+  .hero__video-box {
+    display: block;
+  }
+
+  .services__title,
+  .featured__tour-title,
+  .gallery__title,
+  .testimonial__title,
+  .experience__content h2 {
+    font-size: 2rem;
+  }
+
+  .experience__img {
+    margin-top: 2rem;
+  }
+}
+
+@media only screen and (max-width: 576px) {
+  .hero__content h1 {
+    font-size: 1.8rem;
+  }
+
+  .services__title,
+  .featured__tour-title,
+  .gallery__title,
+  .testimonial__title,
+  .experience__content h2 {
+    font-size: 1.5rem;
+  }
+}

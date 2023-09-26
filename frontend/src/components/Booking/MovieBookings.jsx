@@ -1,0 +1,218 @@
+import SeatSelection from "../Booking/SeatSelectionM";
+import React, { useState, useContext } from "react";
+import "./booking.css";
+import { Form, FormGroup, ListGroup, ListGroupItem, Button } from "reactstrap";
+
+import { AuthContext } from "../../context/AuthContext";
+import { BASE_URL } from "../../utils/config";
+import axios from "axios";
+
+const MovieBookings = ({ movie, avgRating }) => {
+  const { price, title, reviews } = movie;
+
+  const { user } = useContext(AuthContext);
+
+  const [movieBooking, setMovieBooking] = useState({
+    userId: user && user._id,
+    email: user && user.email,
+    name: "",
+    phone: "",
+    seats: "",
+    date: movie.date,
+    movieName: title,
+    date: "",
+    seatsBooked: "",
+    totalAmount: "",
+  });
+
+  const [selectedSeats, setSelectedSeats] = useState([]);
+
+  const serviceFee = 10;
+  const totalAmount =
+    Number(movie.price) * Number(movieBooking.seats) + Number(serviceFee);
+
+
+  const checkoutClickHandler = async (totalAmount) => {
+    try {
+      if (!user || user === undefined || user === null) {
+        return alert("Please sign in");
+      }
+
+      const loggedUserDetails = localStorage.getItem('user');
+      console.log(loggedUserDetails, loggedUserDetails._id);
+      console.log("hi");
+
+      const { data: { order } } = await axios.post("http://localhost:4000/api/v1/paymentRoutes/checkout", {
+        totalAmount,
+        userOBJ: loggedUserDetails
+      });
+
+      const options = {
+        key: "rzp_test_2CZLX7Z2w5aO58", // Enter the Key ID generated from the Dashboard
+        amount: "order.amount", // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
+        currency: "INR",
+        name: "KIMAY GORE",
+        description: "Test Transaction",
+        image: "https://example.com/your_logo",
+        order_id: order.id, //This is a sample Order ID. Pass the `id` obtained in the response of Step 1
+        callback_url: "http://localhost:4000/api/v1/paymentRoutes/paymentverification/",
+        prefill: {
+          name: "Kimay Gore",
+          email: "kimaygore1995@example.com",
+          contact: "9869862543"
+        },
+        notes: {
+          "address": "Razorpay Corporate Office"
+        },
+        theme: {
+          "color": "#3399cc"
+        }
+      };
+      const razor = new window.Razorpay(options);
+      razor.open();
+
+      // const res = await fetch(`${BASE_URL}/busBooking`, {
+      //     method: "post",
+      //     headers: {
+      //         "content-type": "application/json",
+      //     },
+      //     credentials: "include",
+      //     body: JSON.stringify(busBooking),
+      // });
+      const res = await fetch(`${BASE_URL}/movieBooking/`, {
+        method: "post",
+        headers: {
+          "content-type": "application/json",
+        },
+        credentials: "include",
+        body: JSON.stringify({
+          movie: movie._id,
+          seats: selectedSeats,
+          user: user._id
+
+        }),
+      });
+      console.log(res);
+
+    } catch (error) {
+      console.error("Error in checkoutHandler:", error);
+    }
+
+
+  };
+
+
+  const handleChange = (e) => {
+    setMovieBooking((prev) => ({ ...prev, [e.target.id]: e.target.value }));
+  };
+
+  return (
+    <div className="booking">
+      <div className="booking__top d-flex align-items-center justify-content-between">
+        <h3>
+          &#8377;{price} <span>/per person</span>
+        </h3>
+        <span className="tour__rating d-flex align-items-center">
+          <i
+            class="ri-star-fill"
+            style={{ color: "var(--secondary-color)" }}
+          ></i>
+          {avgRating === 0 ? null : avgRating} ({reviews?.length})
+        </span>
+      </div>
+
+      {/* =============== BOOKING FORM START ============== */}
+      <div className="booking__form">
+        <h5>Information</h5>
+        <Form className="booking__info-form">
+          <FormGroup>
+            <div>
+              <input
+                type="text"
+                placeholder="Name"
+                id="name"
+                pattern="^[a-zA-Z\s]{3,20}$"
+                required
+                onChange={handleChange}
+              />
+            </div>
+          </FormGroup>
+          <FormGroup>
+            <input
+              type="tel"
+              placeholder="Phone"
+              id="phone"
+              pattern="[789][0-9]{9}"
+              required
+              onChange={handleChange}
+            />
+          </FormGroup>
+          <FormGroup className="d-flex align-items-center gap-3">
+            <input
+              type="date"
+              placeholder=""
+              id="date"
+              required
+              min={new Date().toISOString().split('T')[0]} // Set minimum date to today
+              onChange={handleChange}
+            />
+            <input
+              type="number"
+              placeholder="Seats"
+              id="seats"
+              required
+              disabled={true}
+              value={selectedSeats.length}
+              onChange={handleChange}
+            />
+          </FormGroup>
+        </Form>
+      </div>
+      {/* =============== BOOKING FORM END ================ */}
+
+      {/* =============== BOOKING BOTTOM ================ */}
+      <div className="booking__bottom">
+        <ListGroup>
+          <ListGroupItem className="border-0 px-0">
+            <h5 className="d-flex align-items-center gap-1">
+              ${price} <i class="ri-close-line"></i> 1 person
+            </h5>
+            <span> ${price}</span>
+          </ListGroupItem>
+          <ListGroupItem className="border-0 px-0">
+            <h5>Service charge</h5>
+            <span>${serviceFee}</span>
+          </ListGroupItem>
+          <ListGroupItem className="border-0 px-0 total">
+            <h5>Total</h5>
+            <span>${movie.price * selectedSeats.length}</span>
+          </ListGroupItem>
+        </ListGroup>
+
+        <Button className="btn primary__btn w-100 mt-4" onClick={() => {
+          checkoutClickHandler(movie.price * selectedSeats.length);
+          // bookseats();
+        }}>
+          Book Now
+        </Button>
+        <div>
+
+          <h3 className="text-2xl">
+            Selected Seats : {selectedSeats.join(", ")}
+          </h3>
+          <h3 className="text-2xl mt-2">
+            Price : {movie.price * selectedSeats.length} /-
+          </h3>
+          <SeatSelection
+            selectedSeats={selectedSeats}
+            setSelectedSeats={setSelectedSeats}
+            movie={movie}
+          />
+
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default MovieBookings;
